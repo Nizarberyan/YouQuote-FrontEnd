@@ -1,27 +1,45 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-
+import axios from "axios";
+interface User {
+  email: string;
+  password: string;
+}
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const loginUrl = import.meta.env.VITE_APP_API_URL;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email === "test@example.com" && password === "password123") {
-      navigate("/quotes");
-    } else {
-      setError("Invalid email or password.");
+  const attemptLogin = async (user: User) => {
+    try {
+      const response = await axios.post(`${loginUrl}/login`, {
+        email: user.email,
+        password: user.password,
+      });
+
+      if (response.status === 200) {
+        const { token, user } = response.data;
+        localStorage.setItem("authToken", token);
+        localStorage.setItem("user", JSON.stringify(user));
+
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        console.log(`login successful ${user.name}`);
+      }
+    } catch (error: any) {
+      if (error.response) {
+        const errorData = error.response.data;
+        setError(errorData.message);
+      } else {
+        alert("An error occurred during Login.");
+      }
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex justify-center items-center">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 space-y-6 w-96"
-      >
+      <form className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 space-y-6 w-96">
         <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-white">
           Se connecter
         </h2>
@@ -63,6 +81,10 @@ export const Login = () => {
         <button
           type="submit"
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md"
+          onClick={(e) => {
+            e.preventDefault();
+            attemptLogin({ email, password });
+          }}
         >
           Se connecter
         </button>
