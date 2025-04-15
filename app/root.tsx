@@ -1,7 +1,9 @@
 import {
   isRouteErrorResponse,
+  Link,
   Links,
   Meta,
+  NavLink,
   Outlet,
   Scripts,
   ScrollRestoration,
@@ -9,6 +11,7 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { Sidebar } from "~/components/layouts/Sidebar";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -42,7 +45,22 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <div className="flex dark:bg-gray-900 dark:text-white min-h-screen">
+      <Sidebar />
+
+      <main className="flex-1 md:ml-64 p-6">
+        <button
+          onClick={() => document.documentElement.classList.toggle("dark")}
+          className="fixed top-4 right-4 z-50 p-2 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded shadow"
+        >
+          🌓
+        </button>
+
+        <Outlet />
+      </main>
+    </div>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
