@@ -8,6 +8,7 @@ interface User {
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState<string>("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const loginUrl = import.meta.env.VITE_APP_API_URL;
@@ -23,9 +24,11 @@ export const Login = () => {
         const { token, user } = response.data;
         localStorage.setItem("authToken", token);
         localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("role", user.role);
 
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        console.log(`login successful ${user.name}`);
+        console.log(`login successful ${user.role}`);
+        navigate("/dashboard");
       }
     } catch (error: any) {
       if (error.response) {
@@ -86,15 +89,23 @@ export const Login = () => {
             attemptLogin({ email, password });
           }}
         >
-          Se connecter
+          Login
         </button>
 
         <p className="text-center text-sm text-gray-600 dark:text-gray-400">
-          Pas encore de compte ?{" "}
+          Dont't have an account ?
           <a href="/register" className="text-blue-600 hover:underline">
-            S'inscrire
+            Register
           </a>
         </p>
+        {message && (
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+            role="alert"
+          >
+            <span className="block sm:inline">{message}</span>
+          </div>
+        )}
       </form>
     </div>
   );

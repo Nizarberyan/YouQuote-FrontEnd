@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export const Register = () => {
   interface User {
@@ -13,7 +14,9 @@ export const Register = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const navigate = useNavigate();
 
   const attemptRegister = async (user: User) => {
     if (password !== confirmPassword) {
@@ -33,6 +36,7 @@ export const Register = () => {
         const data = response.data;
         alert("Registration successful!");
         console.log("User registered:", data.user);
+        navigate("/verify-email");
       }
     } catch (error: any) {
       if (error.response) {
@@ -92,6 +96,14 @@ export const Register = () => {
             className="px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
+        {message && (
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+            role="alert"
+          >
+            <span className="block sm:inline">{message}</span>
+          </div>
+        )}
 
         <div className="flex flex-col space-y-2">
           <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
