@@ -88,4 +88,4 @@ The application is built using **React**, **TypeScript**, and **Vite**, with **A
 ### **3. Environment Variables**
 
 Create a `.env` file in the root of the project and add the following variable:
-```VITE_APP_API_URL=your_beckend_api_andpoint``` 
+```VITE_APP_API_URL=your_beckend_api_endpoint``` 
