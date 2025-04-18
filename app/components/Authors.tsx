@@ -25,7 +25,7 @@ export type Author = {
 };
 
 export const Authors = () => {
-  const [authors, setAuthors] = useState<Author[]>([]);
+  const [authors, setAuthors] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -70,18 +70,20 @@ export const Authors = () => {
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {authors.map((author) => (
+        {authors.map((author, index) => (
           <div
-            key={author.id}
+            key={index}
             className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden p-4"
           >
             <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
-              {author.name}
+              {author}
             </h2>
             <button
               className="text-blue-600 dark:text-blue-400 hover:underline text-sm"
               onClick={() => {
-                navigate(/quote/ + author.id);
+                navigate(
+                  `/authors/${encodeURIComponent(author.toLowerCase().replace(/\s+/g, "-"))}`,
+                );
               }}
             >
               View Quotes

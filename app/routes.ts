@@ -9,4 +9,5 @@ export default [
   route("verify-email", "routes/ConfirmEmailMessage.tsx"),
   route("dashboard", "routes/dashboard.tsx"),
   route("authors", "routes/authors.tsx"),
+  route("authors/:authorId", "routes/authorsQuotes.tsx"),
 ] satisfies RouteConfig;
