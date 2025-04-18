@@ -34,7 +34,7 @@ export const Register = () => {
 
       if (response.status === 201) {
         const data = response.data;
-        alert("Registration successful!");
+
         console.log("User registered:", data.user);
         navigate("/verify-email");
       }
@@ -52,12 +52,12 @@ export const Register = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
       <form className="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 space-y-6">
         <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-white">
-          Créer un compte
+          create an account
         </h2>
 
         <div className="flex flex-col space-y-2">
           <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Nom complet
+            Full name
           </label>
           <input
             type="text"
@@ -71,7 +71,7 @@ export const Register = () => {
 
         <div className="flex flex-col space-y-2">
           <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Adresse e-mail
+            Email address
           </label>
           <input
             type="email"
@@ -85,7 +85,7 @@ export const Register = () => {
 
         <div className="flex flex-col space-y-2">
           <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Mot de passe
+            Password
           </label>
           <input
             type="password"
@@ -107,7 +107,7 @@ export const Register = () => {
 
         <div className="flex flex-col space-y-2">
           <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Confirmer le mot de passe
+            Confirm Password
           </label>
           <input
             type="password"
@@ -127,7 +127,7 @@ export const Register = () => {
             attemptRegister({ name, email, password });
           }}
         >
-          S'inscrire
+          Register
         </button>
 
         <p className="text-center text-sm text-gray-600 dark:text-gray-400">
@@ -136,7 +136,7 @@ export const Register = () => {
             href="/login"
             className="text-blue-600 hover:underline dark:text-blue-400"
           >
-            Se connecter
+            Login
           </a>
         </p>
       </form>

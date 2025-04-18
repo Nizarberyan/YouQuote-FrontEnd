@@ -49,7 +49,7 @@ export const Login = () => {
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex justify-center items-center">
       <form className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 space-y-6 w-96">
         <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-white">
-          Se connecter
+          Login
         </h2>
 
         {error && (
@@ -60,7 +60,7 @@ export const Login = () => {
 
         <div className="flex flex-col space-y-2">
           <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Adresse e-mail
+            Email address
           </label>
           <input
             type="email"
@@ -74,7 +74,7 @@ export const Login = () => {
 
         <div className="flex flex-col space-y-2">
           <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Mot de passe
+            Password
           </label>
           <input
             type="password"
