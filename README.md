@@ -1,6 +1,6 @@
 # YouQuote Frontend
 
-**YouQuote Frontend** is the React-based frontend for the **YouQuote API** project. It allows users to view quotes and authors while providing admin-specific tools for managing quotes, authors, and users.
+**YouQuote Frontend** is the React-based frontend for the [**YouQuote API**](https://github.com/Nizarberyan/youquote-api) project. It allows users to view quotes and authors while providing admin-specific tools for managing quotes, authors, and users.
 
 The application is built using **React**, **TypeScript**, and **Vite**, with **Axios** for API requests. Authentication is handled through JWT tokens stored in `localStorage`.
 
