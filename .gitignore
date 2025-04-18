@@ -5,3 +5,6 @@
 /.react-router/
 /build/
 .idea/
+
+# Environment Variables
+.env
