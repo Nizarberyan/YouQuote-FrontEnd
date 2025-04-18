@@ -28,7 +28,12 @@ export const Login = () => {
 
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         console.log(`login successful ${user.role}`);
-        navigate("/dashboard");
+        if (user.role === "admin") {
+          navigate("/dashboard");
+        } else {
+          navigate("/quotes");
+        }
+        window.dispatchEvent(new Event("auth-change"));
       }
     } catch (error: any) {
       if (error.response) {

@@ -11,17 +11,30 @@ export const Sidebar = () => {
   const toggleSidebar = () => setIsOpen((prev) => !prev);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const token: string | null = localStorage.getItem("authToken");
-      setIsLoggedIn(!!token);
-    }
-    setUserRole(localStorage.getItem("role") || "user");
+    const checkAuth = () => {
+      if (typeof window !== "undefined") {
+        const token: string | null = localStorage.getItem("authToken");
+        setIsLoggedIn(!!token);
+        setUserRole(localStorage.getItem("role") || "user");
+      }
+    };
+
+    checkAuth();
+
+    window.addEventListener("storage", checkAuth);
+    window.addEventListener("auth-change", checkAuth);
+
+    return () => {
+      window.removeEventListener("storage", checkAuth);
+      window.removeEventListener("auth-change", checkAuth);
+    };
   }, []);
 
   const logOut = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("user");
     setIsLoggedIn(false);
+    window.dispatchEvent(new Event("auth-change"));
     navigate("/login");
   };
 

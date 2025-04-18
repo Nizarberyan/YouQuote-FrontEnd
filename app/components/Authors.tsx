@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 
-type Quote = {
+export type Quote = {
   id: string;
   content: string;
   author: string;
@@ -10,11 +10,10 @@ type Quote = {
   popularity_count: number;
   created_at: string;
   updated_at: string;
-  user_id: number;
+  user: Author;
   deleted_at: string | null;
 };
-
-type Author = {
+export type Author = {
   id: string;
   name: string;
   email: string;
