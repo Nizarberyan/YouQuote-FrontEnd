@@ -1,87 +1,90 @@
-# Welcome to React Router!
+# YouQuote Frontend
 
-A modern, production-ready template for building full-stack React applications using React Router.
+**YouQuote Frontend** is the React-based frontend for the **YouQuote API** project. It allows users to view quotes and authors while providing admin-specific tools for managing quotes, authors, and users.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
-
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
-
-## Getting Started
-
-### Installation
-
-Install the dependencies:
-
-```bash
-npm install
-```
-
-### Development
-
-Start the development server with HMR:
-
-```bash
-npm run dev
-```
-
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+The application is built using **React**, **TypeScript**, and **Vite**, with **Axios** for API requests. Authentication is handled through JWT tokens stored in `localStorage`.
 
 ---
 
-Built with ❤️ using React Router.
+## **Features**
+
+### **1. Quotes and Authors (General Users)**
+
+- **Quotes**:
+  - Browse a collection of motivational quotes.
+  - View specific quotes by their details.
+- **Authors**:
+  - Browse all available authors.
+  - View all quotes by a specific author.
+
+---
+
+### **2. Admin Dashboard**
+
+- **Overview**: 
+  - Displays statistics, including users, active quotes, deleted quotes, and verified users.
+  
+- **User Management**: 
+  - View and manage user information.
+  - Edit user roles (e.g., `admin` vs. `user`).
+  - Delete users from the system.
+
+- **Quote Management**:
+  - Manage active quotes:
+    - Publish or delete active quotes.
+  - Manage deleted quotes:
+    - Restore deleted quotes.
+    - Permanently delete quotes.
+
+---
+
+## **Routes**
+
+### Public Routes:
+| Route             | Functionality                                                   |
+|--------------------|----------------------------------------------------------------|
+| `/`               | Home page                                                      |
+| `/register`       | User registration page                                         |
+| `/login`          | User login page                                                |
+| `/quotes`         | Browse all quotes                                              |
+| `/quotes/:quoteId`| View a specific quote                                          |
+| `/authors`        | List all authors                                               |
+| `/authors/:authorId` | View all quotes by a specific author                         |
+
+### Admin Routes (Requires Authentication):
+| Route             | Functionality                                                   |
+|--------------------|----------------------------------------------------------------|
+| `/dashboard`      | Admin dashboard for managing quotes, authors, and users        |
+
+---
+
+## **Getting Started**
+
+### **1. Prerequisites**
+- [Node.js](https://nodejs.org/) (v16 or higher recommended)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+---
+
+### **2. Installation**
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/youquote-frontend.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd youquote-frontend
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+---
+
+### **3. Environment Variables**
+
+Create a `.env` file in the root of the project and configure the following variables as per your backend setup:
